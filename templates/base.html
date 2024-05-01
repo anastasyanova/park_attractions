@@ -21,11 +21,11 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="{{ url_for('index') }}" class="nav-link px-2">Главная</a></li>
-                <li><a href="/" class="nav-link px-2">Аттракционы</a></li>
-                <li><a href="/" class="nav-link px-2">Тематические парки</a></li>
-                <li><a href="/" class="nav-link px-2">Мероприятия</a></li>
-                <li><a href="/" class="nav-link px-2">Цены</a></li>
-                <li><a href="/" class="nav-link px-2">Акции и льготы</a></li>
+                <li><a href="{{ url_for('attractions') }}" class="nav-link px-2">Аттракционы</a></li>
+                <li><a href="{{ url_for('temparks') }}" class="nav-link px-2">Тематические парки</a></li>
+                <li><a href="{{ url_for('meropriyatia') }}" class="nav-link px-2">Мероприятия</a></li>
+                <li><a href="{{ url_for('price') }}" class="nav-link px-2">Цены</a></li>
+                <li><a href="{{ url_for('promotions') }}" class="nav-link px-2">Акции и льготы</a></li>
             </ul>
 
             <div class="dropdown">

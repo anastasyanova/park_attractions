@@ -58,6 +58,41 @@ def index():
         return render_template('index.html', user=current_user)
     else:
         return redirect(url_for('login'))
+    
+@app.route('/attractions')
+def attractions():
+    if current_user.is_authenticated:
+        return render_template('attractions.html', user=current_user)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/temparks')
+def temparks():
+    if current_user.is_authenticated:
+        return render_template('temparks.html', user=current_user)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/meropriyatia')
+def meropriyatia():
+    if current_user.is_authenticated:
+        return render_template('meropriyatia.html', user=current_user)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/price')
+def price():
+    if current_user.is_authenticated:
+        return render_template('price.html', user=current_user)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/promotions')
+def promotions():
+    if current_user.is_authenticated:
+        return render_template('promotions.html', user=current_user)
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/profile')
 def profile():
