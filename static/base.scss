@@ -52,8 +52,6 @@ body {
         color: black;
         border: none;
         outline: none;
-    
-        float:left;
         margin-right:5px;
     }
     
@@ -118,3 +116,28 @@ body {
 
 
 
+.btn-outline-secondary {
+    background-color: #93C0C1;
+    color: black;
+    font-weight: 600;
+    border: none;
+    outline: none;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #659C9D;
+    color: black;
+}
+
+.card_photo {
+    border-radius: 5px;
+
+    height: 300px;
+    display: flex;
+    align-items: center;
+}
+
+
+.card-body {
+    height: 200px;
+}
