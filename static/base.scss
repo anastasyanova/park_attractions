@@ -45,21 +45,20 @@ body {
 .text-center {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
+}
 
-    .btn-primary {
-        background-color: #659C9D;
-        color: black;
-        border: none;
-        outline: none;
-        margin-right:5px;
-    }
-    
-    .btn-primary:hover {
-        background-color: #659C9D;
-        color: black;
-    }
-    
+.btn-primary {
+    background-color: #659C9D;
+    color: black;
+    border: none;
+    outline: none;
+    margin-right:5px;
+}
+
+.btn-primary:hover {
+    background-color: #659C9D;
+    color: black;
 }
 
 
@@ -81,10 +80,6 @@ body {
     .dropdown-item {
         text-transform: uppercase;
     }
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
 }
 
 .dropdown {
@@ -135,9 +130,4 @@ body {
     height: 300px;
     display: flex;
     align-items: center;
-}
-
-
-.card-body {
-    height: 200px;
 }
