@@ -6,6 +6,10 @@ body {
   font-weight: 500;
 }
 
+p {
+  margin-top: 10px;
+}
+
 .header_logo {
   vertical-align: top;
   display: inline-block;
@@ -120,4 +124,50 @@ body {
   height: 300px;
   display: flex;
   align-items: center;
+}
+
+/*Страница Цены*/
+.price_block h3 {
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.price_block_two h3 {
+  margin-top: 10%;
+}
+
+.price_block_three {
+  margin: auto;
+}
+
+.table_button {
+  background-color: #659C9D;
+  width: 70%;
+  height: 60px;
+  border-radius: 40px;
+  border: none;
+  outline: none;
+}
+
+table.delivery {
+  width: 100%;
+  border: 0px;
+  border-collapse: collapse;
+}
+
+table.delivery thead {
+  font-weight: bold;
+}
+
+table.delivery td {
+  padding: 10px;
+  border-bottom: 2px solid #659C9D;
+  font-weight: 600;
+}
+
+table.delivery th {
+  padding: 10px;
+  border-bottom: 2px solid #659C9D;
 }/*# sourceMappingURL=base.css.map */
