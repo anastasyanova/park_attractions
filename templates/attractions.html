@@ -11,18 +11,26 @@
         </div>
     </section>
 
+    <div class="container">
+      <a href="" class="btn btn-primary">Всё</a>
+      <a href="" class="btn btn-primary">Экстремальные</a>
+      <a href="" class="btn btn-primary">Семейные</a>
+      <a href="" class="btn btn-primary">Десткие</a>
+      <a href="" class="btn btn-primary">Интерактивные</a>
+    </div>
+
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/russkaya_gora.jpg') }}">
-                <div class="card-body">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/russkaya_gora.jpg') }}">
+                <div class="card-body" id="category=all">
                   <h4>Русская гора «Молния»</h4>
                   <p class="card-text">Аттракцион «Молния» - большие русские горки в Москве — идеальный выбор для искателя острых ощущений! </p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                             <div>Рост от 120 см</div>
@@ -34,13 +42,13 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/gipnotik.jpg') }}">
-                <div class="card-body">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/gipnotik.jpg') }}">
+                <div class="card-body" id="extreme">
                   <h4>Гипнотик</h4>
                   <p class="card-text">Погружайтесь в гипнотическое движение вращающихся лучей, поднимая градус счастья на сказочную высоту!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 105 см</div>
@@ -52,13 +60,13 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/diskavery.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/diskavery.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Дискавери</h4>
                   <p class="card-text">Аттракцион «Дискавери» - закрутите свой отдых на 360 градусов с фейерверком ярких впечатлений!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 120 см</div>
@@ -68,18 +76,18 @@
                 </div>
               </div>
             </div>
-    
+            
 
 
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/monorels.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/monorels.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Монорельс «Путешествие»</h4>
                   <p class="card-text">Монорельс «Кругосветное путешествие» в парке «Сказка» — настоящий хит среди наших посетителей!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 105 см</div>
@@ -91,13 +99,13 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/koleco.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/koleco.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Колесо обозрения</h4>
                   <p class="card-text">Колесо обозрения в парке Сказка - головокружительные виды на западную Москву с высоты в 35 метров!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 50 см</div>
@@ -109,13 +117,13 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/lodka.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/lodka.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Лодки «Нептун»</h4>
                   <p class="card-text">Аттракцион «Нептун» — отправься в морское путешествие на бамперных лодках!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 80 см</div>
@@ -130,13 +138,13 @@
 
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/karysel.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/karysel.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Сказочная карусель</h4>
                   <p class="card-text">Сказочная карусель с лошадками — незыблемая мировая классика, обожаемая не только детьми, но и взрослыми!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 50 см</div>
@@ -148,13 +156,13 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/cahki.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/cahki.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Чашки</h4>
                   <p class="card-text">Карусель «Чашки» – яркая карусель в виде большого чайного набора приглашает всех к закрутительному столу!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 75 см</div>
@@ -166,13 +174,13 @@
             </div>
             <div class="col">
               <div class="card shadow-sm">
-                <img class="card_photo" src="{{ url_for('static', filename='images/patryl.jpg') }}" alt="Expoventures">
+                <img class="card_photo" src="{{ url_for('static', filename='images/attractions/patryl.jpg') }}" alt="Expoventures">
                 <div class="card-body">
                 <h4>Дорожный патруль</h4>
                   <p class="card-text">Аттракцион «Дорожный патруль» позволит ребенку побывать за рулем настоящего «взрослого» автомобиля!</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                     </div>
                     <div class="text-body-secondary">
                         <div>Рост от 80 см</div>
@@ -187,13 +195,13 @@
 
             <div class="col">
                 <div class="card shadow-sm">
-                  <img class="card_photo" src="{{ url_for('static', filename='images/straxa.jpg') }}" alt="Expoventures">
+                  <img class="card_photo" src="{{ url_for('static', filename='images/attractions/straxa.jpg') }}" alt="Expoventures">
                   <div class="card-body">
                   <h4>Дом страха</h4>
                     <p class="card-text">Уникальная площадка, на которой вы сможете испытать море незабываемых эмоций.</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                       </div>
                       <div class="text-body-secondary">
                           <div>Рост от 100 см</div>
@@ -205,13 +213,13 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                  <img class="card_photo" src="{{ url_for('static', filename='images/shattl.jpg') }}" alt="Expoventures">
+                  <img class="card_photo" src="{{ url_for('static', filename='images/attractions/shattl.jpg') }}" alt="Expoventures">
                   <div class="card-body">
                   <h4>Космический шаттл</h4>
                     <p class="card-text">Уникальная возможность отправиться в увлекательное путешествие по миру виртуальной вселенной.</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                       </div>
                       <div class="text-body-secondary">
                           <div>Рост от 95 см</div>
@@ -223,13 +231,13 @@
               </div>
               <div class="col">
                 <div class="card shadow-sm">
-                  <img class="card_photo" src="{{ url_for('static', filename='images/VR.jpg') }}" alt="Expoventures">
+                  <img class="card_photo" src="{{ url_for('static', filename='images/attractions/VR.jpg') }}" alt="Expoventures">
                   <div class="card-body">
                   <h4>VR мотогонки</h4>
                     <p class="card-text">VR аттракцион Мотоцикл — реалистичный симулятор. Невероятные эмоции! И бесконечно счастье!</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">В КОРЗИНУ</button>
                       </div>
                       <div class="text-body-secondary">
                           <div>Рост от 140 см</div>
