@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
-from models import User, db
+from models import User, Item, db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Item.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 db.init_app(app)
 
@@ -62,10 +63,30 @@ def index():
 @app.route('/attractions')
 def attractions():
     if current_user.is_authenticated:
-        return render_template('attractions.html', user=current_user)
+        items = Item.query.order_by(Item.price).all()
+        return render_template('attractions.html', data=items)
     else:
         return redirect(url_for('login'))
-    
+
+@app.route('/create', methods=['POST', 'GET'])
+def create():
+    if request.method == "POST":
+        name = request.form['name']
+        height = request.form['height']
+        price = request.form['price']
+        description = request.form['description']
+
+        item = Item(name=name, height=height, price=price, description=description)
+
+        try:
+            db.session.add(item)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Ошибка"
+    else:
+        return render_template('create.html')
+       
 @app.route('/temparks')
 def temparks():
     if current_user.is_authenticated:

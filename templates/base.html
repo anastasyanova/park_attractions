@@ -33,6 +33,7 @@
                   <div id="myDropdown" class="dropdown-content">
                     {% if current_user.is_authenticated %}
                         <a href="{{ url_for('profile') }}" class="dropdown-item">Профиль</a>
+                        <a href="{{ url_for('create') }}" class="dropdown-item">Добавить товар</a>
                         <a href="{{ url_for('logout') }}" class="dropdown-item">Выход</a>
                     {% else %}
                         <a href="{{ url_for('login') }}" class="dropdown-item">Вход</a>
