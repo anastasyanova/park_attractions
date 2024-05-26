@@ -17,6 +17,17 @@ class Item(db.Model):
     height = db.Column(db.String(3), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(15), default=True)
+    view = db.Column(db.String(30), default=True)
+
+    def __repr__(self):
+        return self.name
+    
+class Park(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    height = db.Column(db.String(3), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.String(15), default=True)
 
     def __repr__(self):
         return self.name
