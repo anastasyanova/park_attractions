@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+{% block content %}
+      <main class="carousel-container">
+        <div class="carousel">
+          <div class="text-center h2">{{ items.name }}</div>
+          <div class="item active">
+            <img src="/static/images/attractions/russkaya_gora.jpg" alt="Image 1" />
+          </div>
+          <div class="item">
+            <img src="/static/images/attractions/koleco.jpg" alt="Image 2" />
+          </div>
+          <div class="item">
+            <img src="/static/images/attractions/gipnotik.jpg" alt="Image 3" />
+          </div>
+        </div>
+        <button class="btn prev">&#10094;</button>
+        <button class="btn next">&#10095;</button>
+        <div class="dots"></div>
+      </main>
+{% endblock %}

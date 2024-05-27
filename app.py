@@ -64,10 +64,20 @@ def index():
 def attractions():
     if current_user.is_authenticated:
         items = Item.query.order_by(Item.price).all()
-        return render_template('attractions.html', user=current_user, data=items)
+        return render_template('attractions.html', user=current_user, items=items)
     else:
         return redirect(url_for('login'))
+     
+@app.route('/attractions/<int:id>')
+def attractions_detail(id):
+    items = Item.query.get(id)
+    return render_template('attractions_detail.html', user=current_user, items=items)
 
+@app.route('/temparks/<int:id>')
+def temparks_detail(id):
+    parks = Park.query.get(id)
+    return render_template('temparks_detail.html', user=current_user, parks=parks)
+   
 @app.route('/create_a', methods=['POST', 'GET'])
 def create_a():
     if request.method == "POST":
@@ -77,17 +87,17 @@ def create_a():
         description = request.form['description']
         view = request.form['view']
 
-        item = Item(name=name, height=height, price=price, description=description, view=view)
+        items = Item(name=name, height=height, price=price, description=description, view=view)
 
         try:
-            db.session.add(item)
+            db.session.add(items)
             db.session.commit()
             return redirect('/')
         except:
             return "Ошибка"
     else:
         return render_template('create_a.html')
-    
+
 @app.route('/create_b', methods=['POST', 'GET'])
 def create_b():
     if request.method == "POST":
@@ -96,22 +106,22 @@ def create_b():
         price = request.form['price']
         description = request.form['description']
 
-        item = Park(name=name, height=height, price=price, description=description)
+        parks = Park(name=name, height=height, price=price, description=description)
 
         try:
-            db.session.add(item)
+            db.session.add(parks)
             db.session.commit()
             return redirect('/')
         except:
             return "Ошибка"
     else:
-        return render_template('create_b.html')
-       
+           return render_template('create_b.html')
+ 
 @app.route('/temparks')
 def temparks():
     if current_user.is_authenticated:
-        items = Park.query.order_by(Park.price).all()
-        return render_template('temparks.html', user=current_user, data=items)
+        parks = Park.query.order_by(Park.price).all()
+        return render_template('temparks.html', user=current_user, parks=parks)
     else:
         return redirect(url_for('login'))
     
