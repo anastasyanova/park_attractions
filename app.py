@@ -59,7 +59,8 @@ def index():
         return render_template('index.html', user=current_user)
     else:
         return redirect(url_for('login'))
-    
+
+#Аттракционы
 @app.route('/attractions')
 def attractions():
     if current_user.is_authenticated:
@@ -73,10 +74,35 @@ def attractions_detail(id):
     items = Item.query.get(id)
     return render_template('attractions_detail.html', user=current_user, items=items)
 
-@app.route('/temparks/<int:id>')
-def temparks_detail(id):
-    parks = Park.query.get(id)
-    return render_template('temparks_detail.html', user=current_user, parks=parks)
+@app.route('/attractions/<int:id>/del')
+def attractions_delete(id):
+    items = Item.query.get_or_404(id)
+
+    try:
+            db.session.delete(items)
+            db.session.commit()
+            return redirect('/attractions')
+    except:
+            return "При удалении произошла ошибка"
+    
+@app.route('/attractions/<int:id>/update', methods=['POST', 'GET'])
+def attractions_update(id):
+    items = Item.query.get(id)
+    if request.method == "POST":
+        items.name = request.form['name']
+        items.height = request.form['height']
+        items.price = request.form['price']
+        items.description = request.form['description']
+        items.descriptions = request.form['descriptions']
+        items.view = request.form['view']
+
+        try:
+            db.session.commit()
+            return redirect('/attractions')
+        except:
+            return "При редактировании произошла ошибка"
+    else:
+        return render_template('post_update_a.html', user=current_user, items=items)
    
 @app.route('/create_a', methods=['POST', 'GET'])
 def create_a():
@@ -85,18 +111,63 @@ def create_a():
         height = request.form['height']
         price = request.form['price']
         description = request.form['description']
+        descriptions = request.form['descriptions']
         view = request.form['view']
 
-        items = Item(name=name, height=height, price=price, description=description, view=view)
+        items = Item(name=name, height=height, price=price, description=description, view=view, descriptions=descriptions)
 
         try:
             db.session.add(items)
             db.session.commit()
-            return redirect('/')
+            return redirect('/attractions')
         except:
             return "Ошибка"
     else:
         return render_template('create_a.html')
+    
+
+#Тематические парки
+@app.route('/temparks')
+def temparks():
+    if current_user.is_authenticated:
+        parks = Park.query.order_by(Park.price).all()
+        return render_template('temparks.html', user=current_user, parks=parks)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/temparks/<int:id>')
+def temparks_detail(id):
+    parks = Park.query.get(id)
+    return render_template('temparks_detail.html', user=current_user, parks=parks)
+
+@app.route('/temparks/<int:id>/del')
+def temparks_delete(id):
+    parks = Park.query.get_or_404(id)
+
+    try:
+            db.session.delete(parks)
+            db.session.commit()
+            return redirect('/temparks')
+    except:
+            return "При удалении возникла ошибка"
+    
+@app.route('/temparks/<int:id>/update', methods=['POST', 'GET'])
+def temparks_update(id):
+    parks = Park.query.get(id)
+    if request.method == "POST":
+        parks.name = request.form['name']
+        parks.height = request.form['height']
+        parks.price = request.form['price']
+        parks.description = request.form['description']
+        parks.descriptions = request.form['descriptions']
+
+        try:
+            db.session.commit()
+            return redirect('/temparks')
+        except:
+            return "При редактировании возникла ошибка"
+    else:
+        return render_template('post_update_b.html', user=current_user, parks=parks)
 
 @app.route('/create_b', methods=['POST', 'GET'])
 def create_b():
@@ -105,25 +176,18 @@ def create_b():
         height = request.form['height']
         price = request.form['price']
         description = request.form['description']
+        descriptions = request.form['descriptions']
 
-        parks = Park(name=name, height=height, price=price, description=description)
+        parks = Park(name=name, height=height, price=price, description=description, descriptions=descriptions)
 
         try:
             db.session.add(parks)
             db.session.commit()
-            return redirect('/')
+            return redirect('/temparks')
         except:
             return "Ошибка"
     else:
            return render_template('create_b.html')
- 
-@app.route('/temparks')
-def temparks():
-    if current_user.is_authenticated:
-        parks = Park.query.order_by(Park.price).all()
-        return render_template('temparks.html', user=current_user, parks=parks)
-    else:
-        return redirect(url_for('login'))
     
 @app.route('/meropriyatia')
 def meropriyatia():

@@ -2,21 +2,15 @@
 
 {% block title %}{% endblock %}
 {% block content %}
-      <main class="carousel-container">
-        <div class="carousel">
-          <div class="text-center h2">{{ parks.name }}</div>
-          <div class="item active">
-            <img src="/static/images/attractions/russkaya_gora.jpg" alt="Image 1" />
-          </div>
-          <div class="item">
-            <img src="/static/images/attractions/koleco.jpg" alt="Image 2" />
-          </div>
-          <div class="item">
-            <img src="/static/images/attractions/gipnotik.jpg" alt="Image 3" />
-          </div>
+    <div class="row featurette" style="padding-top: 30px;">
+        <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1"><span class="text-body-secondary">{{ parks.name }}</span></h2>
+        <p class="lead">{{ parks.descriptions }}</p>
+        <a href="/temparks/{{ parks.id }}/del" class="btn btn-danger">Удалить</a>
+        <a href="/temparks/{{ parks.id }}/update" class="btn btn-success">Редактировать</a>
         </div>
-        <button class="btn prev">&#10094;</button>
-        <button class="btn next">&#10095;</button>
-        <div class="dots"></div>
-      </main>
+        <div class="col-md-5 order-md-1">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+        </div>
+    </div>
 {% endblock %}

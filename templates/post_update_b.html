@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Редактировать</h1>
+        <form method="post">
+            <input type="text" class="form-control" name="name" value="{{ items.name }}" placeholder="Введите название:"><br>
+            <input type="number" class="form-control" name="height" value="{{ items.height }}" placeholder="Введите рост:"><br>
+            <input type="number" class="form-control" name="price" value="{{ items.price }}" placeholder="Введите цену:"><br>
+            <input type="text" class="form-control" name="description" value="{{ items.description }}" placeholder="Введите описание:"><br>
+            <button class="btn btn-success">Исправить</button>
+        </form>
+    </div>
+{% endblock %}
