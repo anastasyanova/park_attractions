@@ -6,10 +6,13 @@
         <h1>Редактировать</h1>
         <form method="post">
             <input type="text" class="form-control" name="name" value="{{ items.name }}" placeholder="Введите название:"><br>
+            <input type="text" class="form-control" name="view" value="{{ items.view }}" placeholder="Введите тип аттракциона:"><br>
             <input type="number" class="form-control" name="height" value="{{ items.height }}" placeholder="Введите рост:"><br>
             <input type="number" class="form-control" name="price" value="{{ items.price }}" placeholder="Введите цену:"><br>
-            <input type="text" class="form-control" name="description" value="{{ items.description }}" placeholder="Введите описание:"><br>
+            <textarea type="text" class="form-control" name="description" placeholder="Короткое описание:">{{ items.description }}</textarea><br>
+            <textarea type="text" class="form-control" name="descriptions" placeholder="Подробное описание:">{{ items.descriptions }}</textarea><br>
             <button class="btn btn-success">Исправить</button>
+            <a href="{{ url_for('attractions') }}" class="btn btn-success">Назад</a>
         </form>
     </div>
 {% endblock %}

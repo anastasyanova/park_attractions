@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
-from models import User, Item, Park, db
+from models import User, Item, Park, Price_Bez, Abonement, Сertificate, db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
@@ -61,18 +61,18 @@ def index():
         return redirect(url_for('login'))
 
 #Аттракционы
-@app.route('/attractions')
+@app.route('/attraction/attractions')
 def attractions():
     if current_user.is_authenticated:
         items = Item.query.order_by(Item.price).all()
-        return render_template('attractions.html', user=current_user, items=items)
+        return render_template('/attraction/attractions.html', user=current_user, items=items)
     else:
         return redirect(url_for('login'))
      
 @app.route('/attractions/<int:id>')
 def attractions_detail(id):
     items = Item.query.get(id)
-    return render_template('attractions_detail.html', user=current_user, items=items)
+    return render_template('/attraction/attractions_detail.html', user=current_user, items=items)
 
 @app.route('/attractions/<int:id>/del')
 def attractions_delete(id):
@@ -81,7 +81,7 @@ def attractions_delete(id):
     try:
             db.session.delete(items)
             db.session.commit()
-            return redirect('/attractions')
+            return redirect('/attraction/attractions')
     except:
             return "При удалении произошла ошибка"
     
@@ -98,13 +98,13 @@ def attractions_update(id):
 
         try:
             db.session.commit()
-            return redirect('/attractions')
+            return redirect('/attraction/attractions')
         except:
             return "При редактировании произошла ошибка"
     else:
-        return render_template('post_update_a.html', user=current_user, items=items)
+        return render_template('/attraction/post_update_a.html', user=current_user, items=items)
    
-@app.route('/create_a', methods=['POST', 'GET'])
+@app.route('/attraction/create_a', methods=['POST', 'GET'])
 def create_a():
     if request.method == "POST":
         name = request.form['name']
@@ -119,26 +119,26 @@ def create_a():
         try:
             db.session.add(items)
             db.session.commit()
-            return redirect('/attractions')
+            return redirect('/attraction/attractions')
         except:
             return "Ошибка"
     else:
-        return render_template('create_a.html')
+        return render_template('/attraction/create_a.html')
     
 
 #Тематические парки
-@app.route('/temparks')
+@app.route('/temparks/temparks')
 def temparks():
     if current_user.is_authenticated:
         parks = Park.query.order_by(Park.price).all()
-        return render_template('temparks.html', user=current_user, parks=parks)
+        return render_template('/temparks/temparks.html', user=current_user, parks=parks)
     else:
         return redirect(url_for('login'))
     
 @app.route('/temparks/<int:id>')
 def temparks_detail(id):
     parks = Park.query.get(id)
-    return render_template('temparks_detail.html', user=current_user, parks=parks)
+    return render_template('/temparks/temparks_detail.html', user=current_user, parks=parks)
 
 @app.route('/temparks/<int:id>/del')
 def temparks_delete(id):
@@ -147,7 +147,7 @@ def temparks_delete(id):
     try:
             db.session.delete(parks)
             db.session.commit()
-            return redirect('/temparks')
+            return redirect('/temparks/temparks')
     except:
             return "При удалении возникла ошибка"
     
@@ -163,13 +163,13 @@ def temparks_update(id):
 
         try:
             db.session.commit()
-            return redirect('/temparks')
+            return redirect('/temparks/temparks')
         except:
             return "При редактировании возникла ошибка"
     else:
-        return render_template('post_update_b.html', user=current_user, parks=parks)
+        return render_template('/temparks/post_update_b.html', user=current_user, parks=parks)
 
-@app.route('/create_b', methods=['POST', 'GET'])
+@app.route('/temparks/create_b', methods=['POST', 'GET'])
 def create_b():
     if request.method == "POST":
         name = request.form['name']
@@ -183,37 +183,120 @@ def create_b():
         try:
             db.session.add(parks)
             db.session.commit()
-            return redirect('/temparks')
+            return redirect('/temparks/temparks')
         except:
             return "Ошибка"
     else:
-           return render_template('create_b.html')
-    
-@app.route('/meropriyatia')
+           return render_template('/temparks/create_b.html')
+
+#Мероприятия
+@app.route('/meropriyatia/meropriyatia')
 def meropriyatia():
     if current_user.is_authenticated:
-        return render_template('meropriyatia.html', user=current_user)
-    else:
-        return redirect(url_for('login'))
-    
-@app.route('/price')
-def price():
-    if current_user.is_authenticated:
-        return render_template('price.html', user=current_user)
-    else:
-        return redirect(url_for('login'))
-    
-@app.route('/promotions')
-def promotions():
-    if current_user.is_authenticated:
-        return render_template('promotions.html', user=current_user)
+        return render_template('/meropriyatia/meropriyatia.html', user=current_user)
     else:
         return redirect(url_for('login'))
 
-@app.route('/profile')
+#Цены
+@app.route('/prices/price')
+def price():
+    if current_user.is_authenticated:
+        prices = Price_Bez.query.all()
+        abons = Abonement.query.all()
+        certif = Сertificate.query.all()
+        return render_template('/prices/price.html', user=current_user, prices=prices, abons=abons, certif=certif)
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/price_add', methods=['GET', 'POST'])
+def price_add():
+    if request.method == 'POST':
+        name = request.form['name']
+        period = request.form['period']
+        off_tickets = request.form['off_tickets']
+        onn_tickets = request.form['onn_tickets']
+
+        prices = Price_Bez(name=name, period=period, off_tickets=off_tickets, onn_tickets=onn_tickets)
+
+        db.session.add(prices)
+        db.session.commit()
+        return redirect('/prices/price')
+    return render_template('/prices/price_add.html')
+
+@app.route('/abon_add', methods=['GET', 'POST'])
+def abon_add():
+    if request.method == 'POST':
+        name = request.form['name']
+        number_of_tickets = request.form['number_of_tickets']
+        period = request.form['period']
+        one_tickets = request.form['one_tickets']
+        onn_tickets = request.form['onn_tickets']
+        
+        abons = Abonement(name=name, number_of_tickets=number_of_tickets, period=period, one_tickets=one_tickets, onn_tickets=onn_tickets)
+
+        db.session.add(abons)
+        db.session.commit()
+        return redirect('/prices/price')
+    return render_template('/prices/abon_add.html')
+
+@app.route('/certificate_add', methods=['GET', 'POST'])
+def certificate_add():
+    if request.method == 'POST':
+        name = request.form['name']
+        period = request.form['period']
+        tickets = request.form['tickets']
+        
+        certif = Сertificate(name=name, period=period, tickets=tickets)
+
+        db.session.add(certif)
+        db.session.commit()
+        return redirect('/prices/price')
+    return render_template('/prices/certificate_add.html')
+
+@app.route('/price/<int:id>/del')
+def certificate_delete(id):
+    certif = Сertificate.query.get_or_404(id)
+
+    try:
+            db.session.delete(certif)
+            db.session.commit()
+            return redirect('/prices/price')
+    except:
+            return "При удалении возникла ошибка"
+
+@app.route('/price/<int:id>/del')
+def abon_delete(id):
+    abons = Abonement.query.get_or_404(id)
+
+    try:
+            db.session.delete(abons)
+            db.session.commit()
+            return redirect('/prices/price')
+    except:
+            return "При удалении возникла ошибка"
+
+@app.route('/price/<int:id>/del')
+def price_delete(id):
+    prices = Price_Bez.query.get_or_404(id)
+
+    try:
+            db.session.delete(prices)
+            db.session.commit()
+            return redirect('/prices/price')
+    except:
+            return "При удалении возникла ошибка"
+
+@app.route('/promotions/promotions')
+def promotions():
+    if current_user.is_authenticated:
+        return render_template('/promotions/promotions.html', user=current_user)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/profile/profile')
 def profile():
     if current_user.is_authenticated:
-        return render_template('profile.html', user=current_user)
+        return render_template('/profile/profile.html', user=current_user)
     else:
         return redirect(url_for('login'))
 

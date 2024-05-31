@@ -57,6 +57,13 @@ p {
   color: black;
 }
 
+.button_h {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 45px;
+}
+
 /*Выпадающий список*/
 .dropbtns {
   background-color: #659C9D;
@@ -126,11 +133,10 @@ p {
   align-items: center;
 }
 
-/*Страница Аттракционы*/
 /*Страница Цены*/
 .price_block h3 {
   text-align: center;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-bottom: 25px;
   font-weight: 700;
 }
@@ -145,8 +151,8 @@ p {
 
 .table_button {
   background-color: #659C9D;
-  width: 70%;
-  height: 60px;
+  width: 115px;
+  height: 35px;
   border-radius: 40px;
   border: none;
   outline: none;
@@ -163,7 +169,7 @@ table.delivery thead {
 }
 
 table.delivery td {
-  padding: 10px;
+  padding: 15px;
   border-bottom: 2px solid #659C9D;
   font-weight: 600;
 }
@@ -171,97 +177,4 @@ table.delivery td {
 table.delivery th {
   padding: 10px;
   border-bottom: 2px solid #659C9D;
-}
-
-/*Карусель фото*/
-.carousel-container {
-  width: 85%;
-  margin: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--lx-gap);
-}
-.carousel-container .carousel {
-  aspect-ratio: 16/9;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-.carousel-container .carousel .text-center {
-  padding: 25px;
-}
-.carousel-container .carousel .item {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  transition: opacity 0.5s ease-in-out;
-}
-.carousel-container .carousel .item img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
-}
-.carousel-container .carousel .item .caption {
-  width: 100%;
-  padding: var(--lx-space-01);
-  position: absolute;
-  bottom: 0;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 12px;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.carousel-container .carousel .item.active {
-  opacity: 1;
-  display: block;
-}
-.carousel-container .btn {
-  padding: 1em 2em;
-  position: absolute;
-  transform: translateY(-50%);
-  top: 56%;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 900;
-  color: #10100e;
-  background-color: #659C9D;
-  transition: transform 0.2s ease-in-out;
-}
-.carousel-container .btn:active, .carousel-container .btn:focus {
-  transform: translateY(-50%) scale(0.9);
-}
-.carousel-container .btn:hover {
-  transform: translateY(-50%) scale(0.96);
-}
-.carousel-container .prev {
-  left: -3%;
-}
-.carousel-container .next {
-  right: -3%;
-}
-.carousel-container .dots {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.carousel-container .dots .dot {
-  cursor: pointer;
-  height: 10px;
-  width: 10px;
-  background-color: #659C9D;
-  transition: background-color 0.2s ease;
-  margin-top: 10px;
-  border-radius: 50%;
-}
-.carousel-container .dots .dot.active, .carousel-container .dots .dot:hover {
-  background-color: #ffffe6;
 }/*# sourceMappingURL=base.css.map */

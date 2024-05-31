@@ -33,3 +33,33 @@ class Park(db.Model):
 
     def __repr__(self):
         return self.name
+    
+class Price_Bez(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), nullable=False)
+    period = db.Column(db.Integer, nullable=False)
+    off_tickets = db.Column(db.Integer, nullable=False)
+    onn_tickets = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return self.name
+    
+class Abonement(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), nullable=False)
+    number_of_tickets = db.Column(db.Integer, nullable=False)
+    period = db.Column(db.Integer, nullable=False)
+    one_tickets = db.Column(db.Integer, nullable=False)
+    onn_tickets = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return self.name
+    
+class Сertificate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), nullable=False)
+    period = db.Column(db.Integer, nullable=False)
+    tickets = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return self.name

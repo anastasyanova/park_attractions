@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Редактировать</h1>
+        <form method="post">
+            <input type="text" class="form-control" name="name" value="{{ parks.name }}" placeholder="Введите название:"><br>
+            <input type="number" class="form-control" name="height" value="{{ parks.height }}" placeholder="Введите рост:"><br>
+            <input type="number" class="form-control" name="price" value="{{ parks.price }}" placeholder="Введите цену:"><br>
+            <textarea type="text" class="form-control" name="description"  placeholder="Короткое описание:">{{ parks.description }}</textarea><br>
+            <textarea type="text" class="form-control" name="descriptions" placeholder="Подробное описание:">{{ parks.descriptions }}</textarea><br>
+            <button class="btn btn-success">Исправить</button>
+            <a href="{{ url_for('temparks') }}" class="btn btn-success">Назад</a>
+        </form>
+    </div>
+{% endblock %}
