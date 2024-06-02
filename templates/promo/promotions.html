@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Тематические парки{% endblock %}
+{% block title %}Акции и льготы{% endblock %}
 {% block content %}
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
@@ -12,27 +12,23 @@
     </section>
 
     <div class="container">
-      <a href="{{ url_for('create_b') }}" class="btn btn-primary">Добавить парк</a>
+    <a href="{{ url_for('promoc') }}" class="btn btn-primary">Добавить акции и льготы</a>
     </div>
 
     <div class="album py-4 bg-body-tertiary">
         <div class="container">
           <div class="row">
-            {% for p in parks %}
+            {% for promo in promos %}
             <div class="col-md-4 mt-3">
                 <div class="card">
-                  <img class="card_photo" src="" alt="">
+                  <img class="card_photo" src="">
                   <div class="card-body shadow-sm">
-                    <h4>{{ p.name }}</h4>
-                    <p class="card-text">{{ p.description }}</p>
+                    <h4>{{ promos.name }}</h4>
+                    <p class="card-text">{{ promos.description }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a href="/temparks/{{ p.id }}" class="btn btn-sm btn-outline-secondary">ПОДРОБНЕЕ</a>
+                        <a href="/promotions/{{ promo.id }}" class="btn btn-sm btn-outline-secondary">ПОДРОБНЕЕ</a>
                       </div>
-                      <div class="text-body-secondary">
-                              <div><small class="text-muted">от </small>{{ p.height }}<small class="text-muted"> см</small></div>
-                              <div>{{ p.price }}<small class="text-muted"> рублей</small></div>
-                        </div>
                       </div>
                     </div>
                   </div>

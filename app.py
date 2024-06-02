@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
-from models import User, Item, Park, Price_Bez, Abonement, Сertificate, db
+from models import User, Item, Park, Price_Bez, Abonement, Сertificate, Promo, db
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
@@ -16,6 +18,15 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+admin = Admin(app, name='Панель администратора', template_mode='bootstrap3')
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Item, db.session))
+admin.add_view(ModelView(Park, db.session))
+admin.add_view(ModelView(Price_Bez, db.session))
+admin.add_view(ModelView(Abonement, db.session))
+admin.add_view(ModelView(Сertificate, db.session))
+admin.add_view(ModelView(Promo, db.session))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -286,13 +297,66 @@ def price_delete(id):
     except:
             return "При удалении возникла ошибка"
 
-@app.route('/promotions/promotions')
+#Акции и льготы
+@app.route('/promo/promotions')
 def promotions():
     if current_user.is_authenticated:
-        return render_template('/promotions/promotions.html', user=current_user)
+        promos = Promo.query.all()
+        return render_template('/promo/promotions.html', user=current_user, promos=promos)
     else:
         return redirect(url_for('login'))
+    
+@app.route('/promotions/<int:id>')
+def promotions_detail(id):
+    promos = Promo.query.get(id)
+    return render_template('/promo/promotions_detail.html', user=current_user, promos=promos)
 
+@app.route('/promotions/<int:id>/del')
+def promotions_delete(id):
+    promos = Promo.query.get_or_404(id)
+
+    try:
+            db.session.delete(promos)
+            db.session.commit()
+            return redirect('/promo/promotions')
+    except:
+            return "При удалении произошла ошибка"
+    
+@app.route('/promotions/<int:id>/update', methods=['POST', 'GET'])
+def promotions_update(id):
+    promos = Promo.query.get(id)
+    if request.method == "POST":
+        promos.name = request.form['name']
+        promos.description = request.form['description']
+        promos.conditions = request.form['conditions']
+
+        try:
+            db.session.commit()
+            return redirect('/promo/promotions')
+        except:
+            return "При редактировании произошла ошибка"
+    else:
+        return render_template('/promo/post_update_c.html', user=current_user, promos=promos)
+   
+@app.route('/promotions/promoc', methods=['POST', 'GET'])
+def promoc():
+    if request.method == "POST":
+        name = request.form['name']
+        description = request.form['description']
+        conditions = request.form['conditions']
+
+        promos = Promo(name=name, description=description, conditions=conditions)
+
+        try:
+            db.session.add(promos)
+            db.session.commit()
+            return redirect('/promo/promotions')
+        except:
+            return "Ошибка"
+    else:
+        return render_template('/promo/promoc.html')
+
+#Профиль
 @app.route('/profile/profile')
 def profile():
     if current_user.is_authenticated:
