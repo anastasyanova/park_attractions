@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Сертификаты{% endblock %}
+{% block content %}
+    <h1>Добавить сертификат</h1>
+    <div class="col-6">
+    <form method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Название</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="period" class="form-label">Срок активации</label>
+            <input type="text" class="form-control" id="period" name="period" required>
+        </div>
+        <div class="mb-3">
+            <label for="tickets" class="form-label">Онлайн билеты</label>
+            <input type="text" class="form-control" id="tickets" name="tickets" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="{{ url_for('price') }}" class="btn btn-primary">Назад</a>
+    </form> 
+    </div>
+{% endblock %}

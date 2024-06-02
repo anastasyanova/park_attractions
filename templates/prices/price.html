@@ -21,6 +21,7 @@
                     <th></th>
                 </tr>
                 </thead>
+                <a href="{{ url_for('price_add') }}" class="btn btn-sm btn-primary mx-1">Добавить</a>
                 <tbody>
                     {% for prices in prices %}
                         <tr>
@@ -28,6 +29,9 @@
                             <td>{{ prices.period }}</td>
                             <td>{{ prices.off_tickets }}</td>
                             <td><button class="table_button">{{ prices.onn_tickets }}</button></td>
+                            <td>
+                                <a href="/price/{{ prices.id }}/del" class="btn btn-sm btn-danger mx-1">Удалить</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -51,6 +55,7 @@
                     <th></th>
                 </tr>
                 </thead>
+                <a href="{{ url_for('abon_add') }}" class="btn btn-sm btn-primary mx-1">Добавить</a>
                 <tbody>
                     {% for abons in abons %}
                         <tr>
@@ -59,6 +64,9 @@
                             <td>{{ abons.period }}</td>
                             <td>{{ abons.one_tickets }}</td>
                             <td><button class="table_button">{{ abons.onn_tickets }}</button></td>
+                            <td>
+                                <a href="/price/{{ abons.id }}/del" class="btn btn-sm btn-danger mx-1">Удалить</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -79,12 +87,16 @@
                         <th></th>
                     </tr>
                     </thead>
+                    <a href="{{ url_for('certificate_add') }}" class="btn btn-sm btn-primary mx-1">Добавить</a>
                     <tbody>
                         {% for certif in certif %}
                             <tr>
                                 <td>{{ certif.name }}</td>
                                 <td>{{ certif.period }}</td>
                                 <td><button class="table_button">{{ certif.tickets }}</button></td>
+                                <td>
+                                    <a href="/price/{{ certif.id }}/del" class="btn btn-sm btn-danger mx-1">Удалить</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
