@@ -16,9 +16,9 @@ class Item(db.Model):
     name = db.Column(db.String(30), nullable=False)
     height = db.Column(db.String(3), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(15), default=True)
-    descriptions = db.Column(db.String(100), default=True)
-    view = db.Column(db.String(30), default=True)
+    description = db.Column(db.String(15), nullable=False)
+    descriptions = db.Column(db.String(100), nullable=False)
+    view = db.Column(db.String(30), nullable=False)
 
     def __repr__(self):
         return self.name
@@ -28,8 +28,8 @@ class Park(db.Model):
     name = db.Column(db.String(30), nullable=False)
     height = db.Column(db.String(3), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(15), default=True)
-    descriptions = db.Column(db.String(100), default=True)
+    description = db.Column(db.String(15), nullable=False)
+    descriptions = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
         return self.name
