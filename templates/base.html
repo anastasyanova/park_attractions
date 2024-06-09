@@ -34,9 +34,6 @@
                     {% if current_user.is_authenticated %}
                         <a href="{{ url_for('profile') }}" class="dropdown-item">Профиль</a>
                         <a href="{{ url_for('logout') }}" class="dropdown-item">Выход</a>
-                    {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Вход</a>
-                        <a href="{{ url_for('register') }}" class="dropdown-item">Зарегистрироваться</a>
                     {% endif %}
                   </div>
                 </div>

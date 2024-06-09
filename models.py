@@ -16,8 +16,8 @@ class Item(db.Model):
     name = db.Column(db.String(30), nullable=False)
     height = db.Column(db.String(3), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(15), nullable=False)
-    descriptions = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(256), nullable=False)
+    descriptions = db.Column(db.String(256), nullable=False)
     view = db.Column(db.String(30), nullable=False)
 
     def __repr__(self):
@@ -28,15 +28,15 @@ class Park(db.Model):
     name = db.Column(db.String(30), nullable=False)
     height = db.Column(db.String(3), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(15), nullable=False)
-    descriptions = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(256), nullable=False)
+    descriptions = db.Column(db.String(256), nullable=False)
 
     def __repr__(self):
         return self.name
     
 class Price_Bez(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False)
+    name = db.Column(db.String(256), nullable=False)
     period = db.Column(db.Integer, nullable=False)
     off_tickets = db.Column(db.Integer, nullable=False)
     onn_tickets = db.Column(db.Integer, nullable=False)
@@ -46,7 +46,7 @@ class Price_Bez(db.Model):
     
 class Abonement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False)
+    name = db.Column(db.String(256), nullable=False)
     number_of_tickets = db.Column(db.Integer, nullable=False)
     period = db.Column(db.Integer, nullable=False)
     one_tickets = db.Column(db.Integer, nullable=False)
@@ -57,7 +57,7 @@ class Abonement(db.Model):
     
 class Сertificate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False)
+    name = db.Column(db.String(256), nullable=False)
     period = db.Column(db.Integer, nullable=False)
     tickets = db.Column(db.Integer, nullable=False)
 
@@ -66,9 +66,17 @@ class Сertificate(db.Model):
     
 class Promo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
-    conditions = db.Column(db.String(250), nullable=False)
+    name = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.String(256), nullable=False)
+    conditions = db.Column(db.String(256), nullable=False)
+
+    def __repr__(self):
+        return self.name
+    
+class Meropriyatia(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.String(256), nullable=False)
 
     def __repr__(self):
         return self.name

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_login import LoginManager, login_user, current_user, logout_user
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
-from models import User, Item, Park, Price_Bez, Abonement, Сertificate, Promo, db
+from models import User, Item, Park, Price_Bez, Abonement, Сertificate, Promo, Meropriyatia, db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -27,6 +27,7 @@ admin.add_view(ModelView(Price_Bez, db.session))
 admin.add_view(ModelView(Abonement, db.session))
 admin.add_view(ModelView(Сertificate, db.session))
 admin.add_view(ModelView(Promo, db.session))
+admin.add_view(ModelView(Meropriyatia, db.session))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -59,7 +60,7 @@ def register():
             new_user = User(username=username, password=hashed_password, email=email)
             db.session.add(new_user)
             db.session.commit()
-            flash('Account created successfully')
+            flash('Аккаунт успешно создан')
             return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -204,9 +205,53 @@ def create_b():
 @app.route('/meropriyatia/meropriyatia')
 def meropriyatia():
     if current_user.is_authenticated:
-        return render_template('/meropriyatia/meropriyatia.html', user=current_user)
+        meros  = Meropriyatia.query.order_by(Meropriyatia.name).all()
+        return render_template('/meropriyatia/meropriyatia.html', user=current_user, meros=meros )
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login'))    
+    
+@app.route('/meropriyatia/<int:id>/del')
+def mero_delete(id):
+    meros = Meropriyatia.query.get_or_404(id)
+
+    try:
+            db.session.delete(meros)
+            db.session.commit()
+            return redirect('/meropriyatia/meropriyatia')
+    except:
+            return "При удалении возникла ошибка"
+    
+@app.route('/meropriyatia/<int:id>/update', methods=['POST', 'GET'])
+def mero_update(id):
+    meros = Meropriyatia.query.get(id)
+    if request.method == "POST":
+        meros.name = request.form['name']
+        meros.description = request.form['description']
+
+        try:
+            db.session.commit()
+            return redirect('/meropriyatia/meropriyatia')
+        except:
+            return "При редактировании возникла ошибка"
+    else:
+        return render_template('/meropriyatia/post_update_d.html', user=current_user, meros=meros)
+
+@app.route('/meropriyatia/create_d', methods=['POST', 'GET'])
+def create_d():
+    if request.method == "POST":
+        name = request.form['name']
+        description = request.form['description']
+
+        meros = Meropriyatia(name=name, description=description)
+
+        try:
+            db.session.add(meros)
+            db.session.commit()
+            return redirect('/meropriyatia/meropriyatia')
+        except:
+            return "Ошибка"
+    else:
+           return render_template('/meropriyatia/create_d.html')
 
 #Цены
 @app.route('/prices/price')
@@ -363,6 +408,16 @@ def profile():
         return render_template('/profile/profile.html', user=current_user)
     else:
         return redirect(url_for('login'))
+    
+@app.route('/update_profile', methods=['POST'])
+@login_required
+def update_profile():
+    user = User.query.get(current_user.id)
+    user.username = request.form['username']
+    user.email = request.form['email']
+    
+    db.session.commit()
+    return redirect(url_for('profile'))
 
 @app.route('/logout')
 def logout():

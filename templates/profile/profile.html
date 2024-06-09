@@ -2,5 +2,42 @@
 
 {% block title %}Профиль{% endblock %}
 {% block content %}
+    </br>
+	    <h2>Ваш профиль</h2>
+    </br>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8">
+                <h2>{{ user.username }}<br/></h2>
+                <h6>{{ user.email }}<br/></h6>
+            </p>
+            </div>
+        </div>
 
+        
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+          Редактировать профиль
+        </div>
+        <div class="card-body">
+            <form method="post" action="{{ url_for('update_profile') }}">
+                <label for="username">Имя:</label>
+                <input type="text" class="form-control" name="username" id="username"><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email"><br>
+                
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+      </div>
+    </div>
+
+    <br/>
+    <a href="" class="btn btn-danger btn-sm">Удалить аккаунт</a>
+    <br/>
 {% endblock %}
