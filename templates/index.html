@@ -2,5 +2,57 @@
 
 {% block title %}Главная{% endblock %}
 {% block content %}
-
+    <h1 class="title">Акции</h1>
+    <div class="slider" x-data="{start: true, end: false}">
+    <div class="slider__content" x-ref="slider" x-on:scroll.debounce="$refs.slider.scrollLeft == 0 ? start = true : start = false; Math.abs(($refs.slider.scrollWidth - $refs.slider.offsetWidth) - $refs.slider.scrollLeft) < 5 ? end = true : end = false;">
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/hb.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>ВСЕМ ИМЕНИННИКАМ ПОДАРКИ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/promo.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>СОЦИАЛЬНАЯ АКЦИЯ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/grgp.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БИЛЕТЫ ДЛЯ ПЕНСИОНЕРОВ И ВЕТЕРАНОВ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/child.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БИЛЕТЫ ДЛЯ МНОГОДЕТНЫХ СЕМЕЙ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/ligot.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БИЛЕТЫ ДЛЯ ЛЬГОТНЫХ КАТЕГОРИЙ ГРАЖДАН</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/bilet.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БИЛЕТЫ ПО КАРТЕ МОСКВИЧА</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/med.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БИЛЕТЫ ДЛЯ МЕДИЦИНСКИХ РАБОТНИКОВ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/main/bus.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БЕСПЛАТНЫЙ АВТОБУС ДО ПАРКА</h2>
+        </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

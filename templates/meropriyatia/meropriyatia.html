@@ -2,35 +2,106 @@
 
 {% block title %}Мероприятия{% endblock %}
 {% block content %}
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Expoventures</h1>
-            <p class="lead text-body-secondary">Уникальный парк аттракционов, где вас ждут захватывающие приключения и незабываемые впечатления!</p>
+    <h1 class="title">День Рождения</h1>
+    <div class="slider" x-data="{start: true, end: false}">
+    <div class="slider__content" x-ref="slider" x-on:scroll.debounce="$refs.slider.scrollLeft == 0 ? start = true : start = false; Math.abs(($refs.slider.scrollWidth - $refs.slider.offsetWidth) - $refs.slider.scrollLeft) < 5 ? end = true : end = false;">
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/vecherinka.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>ВЕЧЕРИНКА В РИТМЕ СКАЗОК</h2>
         </div>
         </div>
-    </section>
-
-        <div class="album py-4 bg-body-tertiary">
-          <div class="container">
-            <div class="row">
-              {% for meros in meros %}
-              <div class="col-md-4 mt-3">
-                  <div class="card">
-                    <img class="card_photo" src="" alt="">
-                    <div class="card-body shadow-sm">
-                      <h4>{{ meros.name }}</h4>
-                      <p class="card-text">{{ meros.description }}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <a href="" id="myBtn" class="btn btn-sm btn-outline-secondary">ПОДРОБНЕЕ</a>
-                        </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            {% endfor %}
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/orel.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>ОРЁЛ&РЕШКА – ПРАЗДНИК НА УДАЧУ</h2>
         </div>
-      </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/planeta.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>ПЛАНЕТА ДИНОЗАВРОВ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/ograb.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>ИДЕАЛЬНОЕ ОГРАБЛЕНИЕ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/ostrov.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>ОСТРОВ СОКРОВИЩ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/blog.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>БЛОГ ПАТИ</h2>
+        </div>
+        </div>
+        <div class="slider__item">
+        <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/missia.jpg') }}" alt="Image">
+        <div class="slider__info">
+            <h2>МИССИЯ ВЫПОЛНИМА</h2>
+        </div>
+        </div>
     </div>
+    </div>
+
+          <h1 class="title">Корпоротивы</h1>
+          <div class="slider" x-data="{start: true, end: false}">
+          <div class="slider__content" x-ref="slider" x-on:scroll.debounce="$refs.slider.scrollLeft == 0 ? start = true : start = false; Math.abs(($refs.slider.scrollWidth - $refs.slider.offsetWidth) - $refs.slider.scrollLeft) < 5 ? end = true : end = false;">
+              <div class="slider__item">
+              <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/ekoloft.jpg') }}" alt="Image">
+              <div class="slider__info">
+                  <h2>ЭКОЛОФТ</h2>
+              </div>
+              </div>
+              <div class="slider__item">
+              <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/eks.jpg') }}" alt="Image">
+              <div class="slider__info">
+                  <h2>ИНТЕРАКТИВНЫЕ ЭКСКУРСИИ</h2>
+              </div>
+              </div>
+              <div class="slider__item">
+              <img class="slider__image" src="{{ url_for('static', filename='images/meropriyatia/arenda.jpg') }}" alt="Image">
+              <div class="slider__info">
+                  <h2>АРЕНДА ПАРКА ДЛЯ БОЛЬШИХ КОМПАНИЙ</h2>
+              </div>
+            </div>
+          </div>
+
+    <form class="order-form">
+      <h4>Узнать подробности</h4>
+      <br>
+      <div class="form-group">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Номер телефона:*</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="event-type">Тема праздника:</label>
+        <select id="event-type" name="event-type" required>
+          <option value="">Выберите тему</option>
+          <option value="birthday">День Рождения</option>
+          <option value="wedding">Коропоротивы</option>
+          <option value="other">Другое</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Сообщение:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <p>* Мененджер позвонит Вам в течении часа</p>
+      </div>
+      
+      <button type="submit" class="submit-btn">ОТПРАВИТЬ</button>
+    </form>
 {% endblock %}

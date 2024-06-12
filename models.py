@@ -63,20 +63,3 @@ class Сertificate(db.Model):
 
     def __repr__(self):
         return self.name
-    
-class Promo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
-    description = db.Column(db.String(256), nullable=False)
-    conditions = db.Column(db.String(256), nullable=False)
-
-    def __repr__(self):
-        return self.name
-    
-class Meropriyatia(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
-    description = db.Column(db.String(256), nullable=False)
-
-    def __repr__(self):
-        return self.name
