@@ -11,29 +11,6 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.username}>' 
     
-class Item(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
-    height = db.Column(db.String(3), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(256), nullable=False)
-    descriptions = db.Column(db.String(256), nullable=False)
-    view = db.Column(db.String(30), nullable=False)
-
-    def __repr__(self):
-        return self.name
-    
-class Park(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
-    height = db.Column(db.String(3), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(256), nullable=False)
-    descriptions = db.Column(db.String(256), nullable=False)
-
-    def __repr__(self):
-        return self.name
-    
 class Price_Bez(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)

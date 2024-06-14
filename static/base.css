@@ -272,6 +272,13 @@ table.delivery th {
   margin: 0;
 }
 
+.block_special h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
 /*Форма заполненения*/
 .order-form {
   max-width: 1110px;
