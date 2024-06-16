@@ -20,7 +20,7 @@ class Price_Bez(db.Model):
 
     def __repr__(self):
         return self.name
-    
+
 class Abonement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)

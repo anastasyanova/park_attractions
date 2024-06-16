@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_login import LoginManager, login_user, current_user, logout_user
+from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from models import User, Price_Bez, Abonement, Сertificate, db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from email.mime.text import MIMEText
-import smtplib
+import io
+import os
+import qrcode
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
@@ -42,6 +43,12 @@ def login():
             flash('Неверное имя пользователя или пароль')
     return render_template('login.html')
 
+users = {}
+
+UPLOAD_FOLDER = 'static/qr_codes'
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -50,7 +57,26 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
+
         user = User.query.filter_by(username=username).first()
+
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(username)
+        qr.make(fit=True)
+        
+        # Сохраняем QR-код в папку
+        qrcode_filename = f'{username}.png'
+        qrcode_path = os.path.join(UPLOAD_FOLDER, qrcode_filename)
+        qr.make_image(fill_color="black", back_color="white").save(qrcode_path)
+        
+        # Добавляем пользователя в список
+        users[username] = qrcode_filename
+
         if user:
             flash('Имя пользователя уже занято')
         else:
@@ -183,24 +209,36 @@ def price_delete(id):
             return "При удалении возникла ошибка"
 
 #Профиль
-@app.route('/profile/profile')
+@app.route('/profile')
 def profile():
     if current_user.is_authenticated:
-        return render_template('/profile/profile.html', user=current_user)
+        user = User.query.filter_by(username=current_user.username).first()
+        qrcode_path = os.path.join(UPLOAD_FOLDER, f'{user.username}.png')
+        return render_template('/profile.html', user=current_user, qrcode_path =qrcode_path)
     else:
         return redirect(url_for('login'))
+    
+@app.route('/delete_user', methods=['POST'])
+@login_required
+def delete_user():
+    user = User.query.get(current_user.id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('index'))
 
 #Корзина
 @app.route('/cart/cart')
 def cart():
     if current_user.is_authenticated:
-        return render_template('/cart/cart.html', user=current_user, carts=carts)
+        return render_template('/cart/cart.html', user=current_user)
     else:
         return redirect(url_for('login'))
+    
 
 @app.route('/logout')
 def logout():
     logout_user()
+    session.pop('qr_code', None)
     return redirect(url_for('index'))
 
 
