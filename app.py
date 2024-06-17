@@ -57,7 +57,6 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
         user = User.query.filter_by(username=username).first()
 
         qr = qrcode.QRCode(
