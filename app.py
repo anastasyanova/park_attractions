@@ -4,11 +4,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from models import User, Price_Bez, Abonement, Сertificate, db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-import io
+from flask_caching import Cache
 import os
 import qrcode
 
 app = Flask(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
@@ -27,6 +28,13 @@ admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Price_Bez, db.session))
 admin.add_view(ModelView(Abonement, db.session))
 admin.add_view(ModelView(Сertificate, db.session))
+
+class Admin(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.role == 'admin'
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -88,27 +96,20 @@ def register():
 
 
 @app.route('/')
+@cache.cached(timeout=60)
 def index():
-    if current_user.is_authenticated:
-        return render_template('index.html', user=current_user)
-    else:
-        return redirect(url_for('login'))
+    return render_template('index.html', user=current_user, admin_url=url_for('admin.index'))
 
 #Аттракционы
 @app.route('/attraction/attractions')
 def attractions():
-    if current_user.is_authenticated:
-        return render_template('/attraction/attractions.html', user=current_user)
-    else:
-        return redirect(url_for('login'))
+    return render_template('/attraction/attractions.html', user=current_user)
+
 
 #Тематические парки
 @app.route('/temparks/temparks')
 def temparks():
-    if current_user.is_authenticated:
-        return render_template('/temparks/temparks.html', user=current_user)
-    else:
-        return redirect(url_for('login'))
+    return render_template('/temparks/temparks.html', user=current_user)
 
 #Мероприятия
 @app.route('/meropriyatia/meropriyatia')
