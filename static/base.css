@@ -207,7 +207,6 @@ table.delivery th {
   display: flex;
   gap: 1rem;
   padding-bottom: 1rem;
-  scrollbar-color: var(--scrollcolor) var(--scrollbackground);
 }
 .slider__content::-webkit-scrollbar {
   height: 0.5rem;
